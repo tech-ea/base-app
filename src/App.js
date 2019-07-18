@@ -4,6 +4,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 // Material helpers
 import { ThemeProvider } from '@material-ui/styles';
 import { theme } from 'styles';
+import { withAuthentication } from 'api/Session';
 
 import * as PATHS from 'routes/paths';
 import { Landing, Member } from 'routes';
@@ -20,4 +21,4 @@ const App = () => (
     </BrowserRouter>
   </ThemeProvider>
 );
-export default App;
+export default withAuthentication(App);
