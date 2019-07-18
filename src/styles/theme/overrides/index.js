@@ -27,5 +27,5 @@ export default {
   MuiTab,
   MuiTableCell,
   MuiTableRow,
-  MuiTabs
+  MuiTabs,
 };

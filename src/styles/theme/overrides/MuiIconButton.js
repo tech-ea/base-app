@@ -5,7 +5,7 @@ export default {
     padding: '10px',
     color: palette.text.secondary,
     '&:hover': {
-      backgroundColor: 'rgba(0, 0, 0, 0.03)'
-    }
-  }
+      backgroundColor: 'rgba(0, 0, 0, 0.03)',
+    },
+  },
 };
