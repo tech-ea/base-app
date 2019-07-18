@@ -10,7 +10,7 @@ export const grey = {
   600: '#757575',
   700: '#616161',
   800: '#424242',
-  900: '#212121'
+  900: '#212121',
 };
 
 export const black = '#000000';
@@ -26,5 +26,5 @@ export const red = '#ED4740';
 export const primary = {
   main: blue,
   light: '#F6F9FD',
-  dark: '#0B48A0'
+  dark: '#0B48A0',
 };
