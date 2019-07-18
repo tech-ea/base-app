@@ -36,7 +36,7 @@ import { withAuthorization } from 'api/Session';
 import SceneHeader from 'components/SceneHeader';
 // import SceneHeader from 'components/SceneHeader';
 
-// import LogOutListItem from 'components/LogOutListItem';
+import LogOutListItem from 'components/LogOutListItem';
 
 // import Dashboard from './Dashboard';
 // import MemberAccount from 'screens/MemberAccount';
@@ -193,7 +193,7 @@ const Member = props => {
 
         <Divider />
 
-        <List className={classes.onbottom}>{/* <LogOutListItem /> */}</List>
+        <List className={classes.onbottom}>{<LogOutListItem />}</List>
       </Drawer>
       <main
         className={clsx(classes.content, {
