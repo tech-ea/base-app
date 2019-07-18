@@ -18,7 +18,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { withFirebase } from 'api/Firebase';
 
 import ButtonMain from 'elements/ButtonMain';
-
+import * as PATHS from 'routes/paths';
 const useStyles = makeStyles(theme => ({
   root: {
     height: '100vh',
@@ -68,7 +68,7 @@ const Register = props => {
   const [companyName, setCompanyName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [checkboxes, setCheckboxes] = useState({ isAdmin: false });
+  const [checkboxes, setCheckboxes] = useState({ isChecked: false });
   //const firebase = useContext(FirebaseContext);
   // const onSubmit = e => {
   //   e.preventDefault();
@@ -88,6 +88,10 @@ const Register = props => {
     // const { username, email, passwordOne, isAdmin } = this.state;
     // const roles = {};
     e.preventDefault();
+    const initials = `${firstName.charAt(0).toUpperCase()}${lastName
+      .charAt(0)
+      .toUpperCase()}`;
+    const dateRegister = new Date();
 
     try {
       await props.firebase
@@ -99,10 +103,12 @@ const Register = props => {
             lastName,
             email,
             companyName,
+            initials,
+            dateRegister,
           });
         })
         .then(() => {
-          props.history.push('/member');
+          props.history.push(PATHS.MEMBER);
         })
         .catch(error => {
           if (error.code === ERROR_CODE_ACCOUNT_EXISTS) {
@@ -144,23 +150,10 @@ const Register = props => {
         <LockOutlinedIcon />
       </Avatar>
       <Typography component="h1" variant="h5">
-        Sign up
+        Register
       </Typography>
       <form className={classes.form} noValidate onSubmit={onRegister}>
         <Grid container spacing={2}>
-          <Grid item xs={12}>
-            <TextField
-              variant="outlined"
-              required
-              fullWidth
-              id="companyName"
-              label="Company Name"
-              name="companyName"
-              autoComplete="companyName"
-              value={companyName}
-              onChange={e => setCompanyName(e.target.value)}
-            />
-          </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
               autoComplete="fname"
@@ -193,6 +186,19 @@ const Register = props => {
               variant="outlined"
               required
               fullWidth
+              id="companyName"
+              label="Company Name"
+              name="companyName"
+              autoComplete="companyName"
+              value={companyName}
+              onChange={e => setCompanyName(e.target.value)}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              variant="outlined"
+              required
+              fullWidth
               id="email"
               label="Email Address"
               name="email"
@@ -218,8 +224,15 @@ const Register = props => {
           <Grid item xs={12}>
             <FormControlLabel
               className={classes.label}
-              control={<Checkbox value="allowExtraEmails" color="primary" />}
-              label="I want to receive inspiration, marketing promotions and updates via email."
+              control={
+                <Checkbox
+                  checked={checkboxes.isChecked}
+                  onChange={handleChange('isChecked')}
+                  value="isChecked"
+                  color="primary"
+                />
+              }
+              label="I agree to terms and conditions."
             />
           </Grid>
           {errors && (
@@ -230,10 +243,12 @@ const Register = props => {
             </Grid>
           )}
         </Grid>
-        <ButtonMain type="submit">REGISTER</ButtonMain>
+        <ButtonMain type="submit" disabled={!checkboxes.isChecked}>
+          REGISTER
+        </ButtonMain>
         <Grid container justify="flex-end">
           <Grid item>
-            <Link component={BtnLink} to="/login" variant="body2">
+            <Link component={BtnLink} to={PATHS.LOGIN} variant="body2">
               Already have an account? Sign in
             </Link>
           </Grid>
