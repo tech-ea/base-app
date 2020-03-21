@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { createContext } from 'react';
 import ReactDOM from 'react-dom';
 
 import 'typeface-roboto';
 // import './index.css';
-import Firebase, { FirebaseContext } from 'api/Firebase';
+import Firebase from 'api/Firebase';
+
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+const FirebaseContext = createContext(null);
 
 ReactDOM.render(
   <FirebaseContext.Provider value={new Firebase()}>

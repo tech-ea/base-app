@@ -1,6 +1,5 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
-import { compose } from 'recompose';
+import { useHistory } from 'react-router-dom';
 
 import AuthUserContext from './context';
 import { withFirebase } from 'api/Firebase';
@@ -37,10 +36,7 @@ const withAuthorization = condition => Component => {
     }
   }
 
-  return compose(
-    withRouter,
-    withFirebase
-  )(WithAuthorization);
+  return compose(withRouter, withFirebase)(WithAuthorization);
 };
 
 export default withAuthorization;
